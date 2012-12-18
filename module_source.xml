@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.module.source.serie" id="serie_20">
+            <field name="name">2.0</field>
+            <field name="stable" eval="True"/>
+        </record>
+        <record model="ir.module.source.serie" id="serie_22">
+            <field name="name">2.2</field>
+            <field name="stable" eval="True"/>
+        </record>
+        <record model="ir.module.source.serie" id="serie_24">
+            <field name="name">2.4</field>
+            <field name="stable" eval="True"/>
+        </record>
+        <record model="ir.module.source.serie" id="serie_26">
+            <field name="name">2.6</field>
+            <field name="stable" eval="True"/>
+        </record>
+        <record model="ir.module.source.serie" id="serie_27">
+            <field name="name">2.7</field>
+            <field name="stable" eval="False"/>
+        </record>
+
+        <record model="ir.ui.view" id="module_source_view_form">
+            <field name="model">ir.module.source</field>
+            <field name="type">form</field>
+            <!--<field name="name">module_source_form</field>-->
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Module Source" col="6">
+                    <label name="name"/>
+                    <field name="name" xexpand="1"/>
+                    <label name="author"/>
+                    <field name="author"/>
+                    <label name="server_serie"/>
+                    <field name="server_serie"/>
+                    <notebook colspan="6">
+                        <page id="pypi_package_info" col="4"
+                                string="Pypi Package Info">
+                            <label name="pypi_package_name"/>
+                            <field name="pypi_package_name"/>
+                            <label name="pypi_release_version"/>
+                            <field name="pypi_release_version"/>
+                            <label name="pypi_release_url"/>
+                            <field name="pypi_release_url" colspan="3"/>
+                        </page>
+                        <page id="scm_info" col="4" string="SCM Info">
+                            <label name="scm_url"/>
+                            <field name="scm_url" colspan="3"/>
+                            <label name="scm_type"/>
+                            <field name="scm_type"/>
+                            <label name="scm_branch"/>
+                            <field name="scm_branch"/>
+                        </page>
+                        <page id="pm_info" col="4"
+                            string="Project Manager Info">
+                        </page>
+                    </notebook>
+                    <label name="used"/>
+                    <field name="used"/>
+                    <label name="original_source"/>
+                    <field name="original_source"/>
+                    <separator id="state_and_buttons_separator" colspan="6"/>
+                    <group col="4" colspan="6" id="state_buttons">
+                        <label name="state"/>
+                        <field name="state"/>
+                        <group col="5" colspan="2" id="buttons">
+                            <button string="Reset to Draft" name="draft"
+                                icon="tryton-clear"/>
+                            <button name="validate" string="Validate"
+                                        icon="tryton-ok"/>
+                            <button name="set_deprecated"
+                                string="Set Deprecated"
+                                icon="tryton-cancel"/>
+                        </group>
+                    </group>
+                </form>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="module_source_view_tree">
+            <field name="model">ir.module.source</field>
+            <field name="type">tree</field>
+            <!--<field name="name">module_source_list</field>-->
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="Parties">
+                    <field name="name"/>
+                    <field name="author"/>
+                    <field name="server_serie"/>
+                    <field name="used"/>
+                    <field name="pypi_package_name"/>
+                    <field name="scm_type"/>
+                    <field name="pm_type"/>
+                    <field name="state"/>
+                </tree>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.action.act_window" id="act_module_source_form">
+            <field name="name">Sources</field>
+            <field name="type">ir.action.act_window</field>
+            <field name="res_model">ir.module.source</field>
+            <!--<field name="domain">[('name', '!=', 'test')]</field>-->
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_module_source_form_view1">
+            <field name="sequence" eval="1"/>
+            <field name="view" ref="module_source_view_tree"/>
+            <field name="act_window" ref="act_module_source_form"/>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_module_source_form_view2">
+            <field name="sequence" eval="2"/>
+            <field name="view" ref="module_source_view_form"/>
+            <field name="act_window" ref="act_module_source_form"/>
+        </record>
+        <menuitem parent="ir.menu_modules"
+            action="act_module_source_form" id="menu_module_source_form"/>
+    </data>
+</tryton>

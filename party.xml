@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="party_view_tree">
+            <field name="model">party.party</field>
+            <field name="inherit" ref="party.party_view_tree"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <data>
+                    <xpath expr="/tree/field[@name='vat_code']"
+                            position="after">
+                        <field name="pypi_author"/>
+                        <field name="bitbucket_user"/>
+                    </xpath>
+                </data>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="party_view_form">
+            <field name="model">party.party</field>
+            <field name="inherit" ref="party.party_view_form"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <data>
+                    <xpath expr="/form/notebook/page[@id=&quot;accounting&quot;]"
+                            position="before">
+                        <page string="Module Author" id="module_source_author">
+                            <label name="pypi_author"/>
+                            <field name="pypi_author"/>
+                            <label name="bitbucket_user"/>
+                            <field name="bitbucket_user"/>
+                            <separator name="module_sources" colspan="4"/>
+                            <field name="module_sources" colspan="4"/>
+                        </page>
+                    </xpath>
+                </data>
+                ]]>
+            </field>
+        </record>
+    </data>
+</tryton>
+

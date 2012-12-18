@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.action.wizard" id="wizard_get_pypi_packages">
+            <field name="name">Get Pypi Packages</field>
+            <field name="wiz_name">ir.module.source.get_pypi_packages</field>
+        </record>
+
+        <record model="ir.action.keyword" id="act_get_pypi_packages_keyword1">
+            <field name="action" ref="wizard_get_pypi_packages"/>
+            <field name="keyword">form_action</field>
+            <field name="model">ir.module.source,-1</field>
+        </record>
+
+        <record model="ir.ui.view" id="get_pypi_packages_package_list_view_form">
+            <field name="model">ir.module.source.get_pypi_packages.package_list</field>
+            <field name="type">form</field>
+            <field name="name">get_pypi_packages_package_list_form</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Pypi Packages to Import" col="2">
+                    <label name="serie"/>
+                    <field name="serie"/>
+                    <label name="n_packages"/>
+                    <field name="n_packages"/>
+                    <separator id="package_list_separator"
+                        string="Package List" colspan="2"/>
+                    <field name="package_list" colspan="2"/>
+                </form>
+                ]]>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="get_pypi_packages_result_view_form">
+            <field name="model">ir.module.source.get_pypi_packages.result</field>
+            <field name="type">form</field>
+            <field name="name">get_pypi_packages_result_form</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Imported Sources from Pypi Packages" col="2">
+                    <label id="message" colspan="2"
+                        string="Pypi Packages have been imported successful."/>
+                    <separator id="result_separator" colspan="2"/>
+                    <label name="n_new_sources"/>
+                    <field name="n_new_sources"/>
+                    <label name="n_updated_sources"/>
+                    <field name="n_updated_sources"/>
+                </form>
+                ]]>
+            </field>
+        </record>
+
+        <menuitem name="Get Pypi Packages"
+            parent="menu_module_source_form"
+            action="wizard_get_pypi_packages"
+            id="menu_wizard_get_pypi_packages"/>
+    </data>
+</tryton>
